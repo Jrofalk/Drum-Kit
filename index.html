@@ -63,10 +63,24 @@ window.addEventListener('keydown', function(event){
   const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
   //The below logs the audio file to be played with the associated key
   //console.log(audio)
+  const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
   if(!audio) return; //This stops the function is there is no sound associated with the key.
   audio.currentTime = 0; //Sets currentTime to zero, so the audio plays from the start each time a key is pressed.
   audio.play();
+  //console.log(key); //Logs to console the key that is being pressed
+  key.classList.add('playing')//Adds class of 'playing' to each key selected.
 });
+
+function removeTransition(event){
+  //console.log(event); //Displays each transition event in the console.
+  if(event.propertyName !== 'transform') return;//Skip event if it is not a transform.
+  //console.log(event.propertyName);
+  this.classList.remove('playing'); //Removes class of playing from each key selected 
+}
+
+const keys = document.querySelectorAll('.key')
+//console.log(keys);
+keys.forEach( key => key.addEventListener('transitionend', removeTransition));//When transition ends, end transition
 </script>
 
 
