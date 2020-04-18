@@ -59,7 +59,13 @@
 
 <script>
 window.addEventListener('keydown', function(event){
-  console.log(event)
+  //console.log(event)
+  const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+  //The below logs the audio file to be played with the associated key
+  //console.log(audio)
+  if(!audio) return; //This stops the function is there is no sound associated with the key.
+  audio.currentTime = 0; //Sets currentTime to zero, so the audio plays from the start each time a key is pressed.
+  audio.play();
 });
 </script>
 
